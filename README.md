@@ -56,41 +56,42 @@ You need a **GitHub** account (a place that stores the site files) and a **Cloud
 
 9. Refresh the GitHub page. You should see files such as `index.html` and `styles.css`.
 
-### Connect GitHub to Cloudflare Pages
+### Connect GitHub to Cloudflare
+
+Use the current **Create an app** screen. Do **not** click **Continue to Pages** (that is the old workflow).
 
 1. Open [https://dash.cloudflare.com](https://dash.cloudflare.com) and sign in. If you do not have an account, click **Sign up** first (the free plan is enough).
 2. In the left sidebar, click **Workers & Pages**.
 3. Click **Create**.
-4. Click the **Pages** tab.
-5. Click **Import an existing Git repository** (or **Connect to Git**).
-6. If Cloudflare asks to connect GitHub, click **Connect GitHub**, then **Install & Authorize**, and allow access to the `squaredealdocs` repository.
-7. Select the **squaredealdocs** repository.
-8. Fill in the setup form exactly like this:
+4. On **Make something new**, click **Continue with GitHub**.
+5. If GitHub asks for permission, click **Authorize** / **Install & Authorize**, and allow access to the `squaredealdocs` repository.
+6. Select the **squaredealdocs** repository (it is already on GitHub at `terrakronos/squaredealdocs`).
+7. Fill in the setup form like this:
    - **Project name:** `squaredealdocs`
-   - **Production branch:** `main`
-   - **Framework preset:** **None**
+   - **Production branch / Deploy command branch:** `main`
+   - **Framework preset:** **None** (do not pick Next.js, React, or similar)
    - **Build command:** leave blank
-   - **Build output directory:** `/`
-9. Click **Save and Deploy**.
-10. Wait until the build shows **Success**. You should get a temporary address like `https://squaredealdocs.pages.dev`. Open it and confirm the site looks right.
+   - **Deploy / output / assets directory:** `/` or `.` (the repo root)
+8. Click **Save and Deploy**, **Deploy**, or **Create** — whichever primary button Cloudflare shows.
+9. Wait until the build shows **Success**. Open the temporary address Cloudflare gives you (`https://squaredealdocs.workers.dev` or `https://squaredealdocs.pages.dev`). You should see the SquareDeal Docs page.
 
-Common mistake: do not pick a framework such as Next.js or React. This site has no build step.
+Common mistakes: clicking **Continue to Pages**; clicking **Start with Hello World!**; clicking **Upload your static files** (that path will not update automatically when the GitHub repo changes).
 
 ## 3. Custom domain: squaredealdocs.com
 
-Do this **after** the Pages project has deployed successfully.
+Do this **after** the project has deployed successfully.
 
 1. In the Cloudflare dashboard, click **Workers & Pages**.
 2. Click the **squaredealdocs** project.
-3. Click the **Custom domains** tab.
-4. Click **Set up a domain**.
-5. Type `squaredealdocs.com` and click **Continue**.
-6. Follow the prompts until the domain is listed. Success looks like **Active** (it may say **Initializing** for a few minutes first).
-7. Click **Set up a domain** again.
-8. Type `www.squaredealdocs.com` and click **Continue**.
-9. Wait until **www** also shows **Active**.
+3. Open **Settings**, then **Domains & Routes**. (If you see a **Custom domains** tab instead, use that — it is the same job.)
+4. Click **Add**, then **Custom Domain** (or **Set up a domain**).
+5. Type `squaredealdocs.com` and click **Add Custom Domain** / **Continue**.
+6. Repeat for `www.squaredealdocs.com`.
+7. Wait until both names show **Active**. **Initializing** for a few minutes is normal.
 
 Cloudflare will then issue HTTPS (the padlock / `https://`) automatically. That can take a few minutes.
+
+This works best when `squaredealdocs.com` is already a website (zone) in the same Cloudflare account. If it is not, add the domain first using the DNS steps below.
 
 ## 4. DNS
 
@@ -110,13 +111,13 @@ Use this if you can change nameservers at the company where you bought `squarede
 8. Delete the old nameservers and paste the two Cloudflare nameservers.
 9. Click **Save**.
 10. Return to Cloudflare. Wait until the zone status is **Active**. This can take a few minutes, sometimes up to 24 hours.
-11. Then complete **section 3** above (add `squaredealdocs.com` and `www.squaredealdocs.com` as Pages custom domains).
+11. Then complete **section 3** above (add `squaredealdocs.com` and `www.squaredealdocs.com` as custom domains).
 12. Cloudflare will create the DNS records for you and turn on the orange-cloud **proxy**. HTTPS is automatic.
 
 Common mistakes:
 
 - Changing A records but leaving the old nameservers. For this best path, nameservers must be Cloudflare’s.
-- Adding the custom domain in Pages **before** the domain is a Cloudflare zone. Add the domain as a Cloudflare website first, wait until it is active, then attach it to Pages.
+- Adding the custom domain **before** the domain is a Cloudflare website. Add the domain as a Cloudflare website first, wait until it is active, then attach it.
 - Expecting the new domain to work in 10 seconds. Nameserver changes often take 15–60 minutes.
 
 ### If the domain stays at another registrar
