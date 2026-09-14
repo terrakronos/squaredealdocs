@@ -185,8 +185,9 @@ p {
 
 .hero-banner {
   overflow: hidden;
-  height: clamp(9rem, 28vw, 16.5rem);
-  background: #3c3c3c;
+  height: clamp(5.5rem, 16vw, 9.5rem);
+  background: #e7e2d8;
+  border-bottom: 1px solid var(--line);
 }
 
 .hero-banner img {
@@ -194,8 +195,7 @@ p {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center 32%;
-  filter: grayscale(0.25) contrast(1.04);
+  object-position: center;
 }
 
 .intro {
