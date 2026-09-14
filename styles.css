@@ -186,7 +186,7 @@ p {
 .hero-banner {
   overflow: hidden;
   height: clamp(5.5rem, 16vw, 9.5rem);
-  background: #e7e2d8;
+  background: #e7e2d8 url("paper.jpg") center / cover no-repeat;
   border-bottom: 1px solid var(--line);
 }
 
